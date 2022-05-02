@@ -11,7 +11,7 @@ defineProps<{
   <div v-if="orders.length" class="orders-container">
     <h1 class="orders-header">Hot</h1>
     <ul class="orders-list">
-      <li v-for="order in orders" :key="order.bid._id">
+      <li v-for="order in orders" :key="order.ask._id + order.bid._id">
         <hr class="order-line" />
 
         <p>

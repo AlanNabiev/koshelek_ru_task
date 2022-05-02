@@ -55,8 +55,8 @@ function subscribeToOrders() {
       ]
 
       eventbus.value.emit('update:Diff', {
-        newAsk: transformedAsks[0] as Order,
-        newBid: transformedBids[0] as Order
+        newAsk: orders.asks[0] as Order,
+        newBid: orders.bids[0] as Order,
       })
     }
   }
