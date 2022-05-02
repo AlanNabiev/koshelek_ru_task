@@ -4,14 +4,11 @@ import Table from '@/components/Table.vue'
 import Loader from '@/components/Loader.vue'
 import useCore from '@/composables/useCore'
 import { symbols } from '@/constants/app'
+import { Order } from '@/types'
+
 const { binanceSdk, eventbus } = useCore()
 const loading = ref(false)
 const symbol = ref(symbols[0])
-interface Order {
-  price: number
-  amount: number
-  total: number
-}
 const orders = reactive<{
   bids: Order[]
   asks: Order[]
@@ -56,6 +53,11 @@ function subscribeToOrders() {
         ...transformedBids,
         ...orders.bids.slice(0, orders.bids.length - transformedBids.length)
       ]
+
+      eventbus.value.emit('update:Diff', {
+        newAsk: transformedAsks[0] as Order,
+        newBid: transformedBids[0] as Order
+      })
     }
   }
 }
